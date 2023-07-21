@@ -31,6 +31,7 @@ namespace RecursiveFlatZipper
 #if DEBUG
             Console.ReadKey();
 #endif
+            Environment.Exit(1);
         }
 
         static void Run(Options opts)
@@ -45,8 +46,20 @@ namespace RecursiveFlatZipper
 #if DEBUG
                 Console.ReadKey();
 #endif
+                Environment.Exit(2);
                 return;
             }
+            if(File.Exists(opts.outputFile))
+            {
+                Console.WriteLine("Output file already exists.");
+#if DEBUG
+                Console.ReadKey();
+#endif
+                Environment.Exit(4);
+                return;
+            }
+
+            Directory.CreateDirectory(Path.GetDirectoryName( opts.outputFile));
 
             using (FileStream fs = new FileStream(opts.outputFile, FileMode.CreateNew))
             {
