@@ -37,7 +37,7 @@ namespace RecursiveFlatZipper
         static void Run(Options opts)
         {
             Regex regex = new Regex(opts.searchRegexString, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            Dictionary<string,string> filesToAdd = new Dictionary<string, string>();
+            SortedDictionary<string,string> filesToAdd = new SortedDictionary<string, string>();
             ProcessFolder(ref filesToAdd,opts.rootFolder, regex);
 
             if(filesToAdd.Count == 0)
@@ -87,7 +87,7 @@ namespace RecursiveFlatZipper
             return;
         }
 
-        static void ProcessFolder(ref Dictionary<string, string> filesToAdd,string path, Regex matchPattern)
+        static void ProcessFolder(ref SortedDictionary<string, string> filesToAdd,string path, Regex matchPattern)
         {
             string[] files = Directory.GetFiles(path);
             string[] folders = Directory.GetDirectories(path);
