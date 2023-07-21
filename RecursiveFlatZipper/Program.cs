@@ -59,7 +59,11 @@ namespace RecursiveFlatZipper
                 return;
             }
 
-            Directory.CreateDirectory(Path.GetDirectoryName( opts.outputFile));
+            string outputFileDirectory = Path.GetDirectoryName(opts.outputFile);
+            if (outputFileDirectory.Trim() != "." && outputFileDirectory.Trim().Length != 0)
+            {
+                Directory.CreateDirectory(outputFileDirectory);
+            }
 
             using (FileStream fs = new FileStream(opts.outputFile, FileMode.CreateNew))
             {
